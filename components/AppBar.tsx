@@ -1,10 +1,8 @@
-import { Suspense } from 'react';
-import Loading from '../components/Loading';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
-import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { SignInButton, SignOutButton, SignUpButton } from './AuthButtons';
+import Link from 'next/link';
 
 async function AppBar() {
 	const session = await getServerSession(authOptions);
@@ -36,23 +34,29 @@ async function AppBar() {
 		</ul>
 	);
 
+	const MainMenuOption = ({ text, link }: { text: string; link: string }) => (
+		<li>
+			<Link
+				href={link}
+				className='block py-2 pl-3 pr-4 rounded md:bg-transparent md:hover:text-secondary'
+				aria-current='page'
+			>
+				{text}
+			</Link>
+		</li>
+	);
+
 	return (
-		<nav className='bg-white border-gray-200 dark:bg-gray-900'>
+		<nav className='bg-primary shadow-2xl'>
 			<div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4'>
-				<a href='https://flowbite.com/' className='flex items-center'>
-					<img
-						src='https://flowbite.com/docs/images/logo.svg'
-						className='h-8 mr-3'
-						alt='logo'
-					/>
-					<span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
-						Site Name
-					</span>
-				</a>
+				<Link href='/' className='flex items-center'>
+					<img src='https://flowbite.com/docs/images/logo.svg' className='h-8 mr-3' alt='logo' />
+					<span className='text-2xl font-semibold'>Site Name</span>
+				</Link>
 				<div className='flex items-center md:order-2'>
 					<button
 						type='button'
-						className='flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600'
+						className='flex mr-3 text-sm bg-secondary rounded-full md:mr-0 focus:ring-4'
 						id='user-menu-button'
 						aria-expanded='false'
 						data-dropdown-toggle='user-dropdown'
@@ -60,7 +64,7 @@ async function AppBar() {
 					>
 						<span className='sr-only'>Open user menu</span>
 						<Image
-							className='rounded-full'
+							className='rounded-full border-2 border-secondary'
 							width={48}
 							height={48}
 							src='/images/avatar.png'
@@ -69,7 +73,7 @@ async function AppBar() {
 					</button>
 					{/* <!-- Dropdown menu --> */}
 					<div
-						className='z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600'
+						className='z-50 hidden my-4 text-base list-none bg-contrast rounded-lg shadow-2xl'
 						id='user-dropdown'
 					>
 						{session && (
@@ -87,7 +91,7 @@ async function AppBar() {
 					<button
 						data-collapse-toggle='mobile-menu-2'
 						type='button'
-						className='inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+						className='inline-flex items-center p-2 ml-1 text-sm text-secondary rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200'
 						aria-controls='mobile-menu-2'
 						aria-expanded='false'
 					>
@@ -111,48 +115,10 @@ async function AppBar() {
 					className='items-center justify-between hidden w-full md:flex md:w-auto md:order-1'
 					id='mobile-menu-2'
 				>
-					<ul className='flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700'>
-						<li>
-							<a
-								href='#'
-								className='block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500'
-								aria-current='page'
-							>
-								Home
-							</a>
-						</li>
-						<li>
-							<a
-								href='#'
-								className='block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-							>
-								About
-							</a>
-						</li>
-						<li>
-							<a
-								href='#'
-								className='block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-							>
-								Services
-							</a>
-						</li>
-						<li>
-							<a
-								href='#'
-								className='block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-							>
-								Pricing
-							</a>
-						</li>
-						<li>
-							<a
-								href='#'
-								className='block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-							>
-								Contact
-							</a>
-						</li>
+					<ul className='flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg bg-gray-50 md:bg-primary md:flex-row md:space-x-8 md:mt-0 md:border-0'>
+						<MainMenuOption text='Home' link='/' />
+						<MainMenuOption text='Pricing' link='/' />
+						<MainMenuOption text='Contact' link='/' />
 					</ul>
 				</div>
 			</div>

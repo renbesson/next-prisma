@@ -4,10 +4,15 @@ module.exports = {
 		'./app/**/*.{js,ts,jsx,tsx}',
 		'./components/**/*.{js,ts,jsx,tsx}',
 		'./node_modules/flowbite/**/*.js',
-		"./node_modules/flowbite-react/**/*.js",
-    "./public/**/*.html",
+		'./node_modules/flowbite-react/**/*.js',
+		'./public/**/*.html',
 	],
 	theme: {
+		colors: {
+			primary: '#E81EEB',
+			secondary: '#04E762',
+			contrast: '#F4F4ED',
+		},
 		extend: {
 			fontFamily: {
 				default: ['var(--font-inter)'],
