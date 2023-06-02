@@ -1,5 +1,5 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 import { compare } from 'bcrypt';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -49,7 +49,21 @@ export const authOptions: NextAuthOptions = {
 			},
 		}),
 	],
-	secret: process.env.NEXTAUTH_SECRET,
+	callbacks: {
+		session: ({ token, session }) => {
+			return { ...session, user: { ...session.user, id: token.id } };
+		},
+		jwt: ({ token, user }) => {
+			if (user) {
+				const u = user as unknown as User;
+				return { ...token, id: u.id };
+			}
+			return token;
+		},
+	},
+	pages: {
+		signIn: '/signin',
+	},
 };
 
 const handler = NextAuth(authOptions);

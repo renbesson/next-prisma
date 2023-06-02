@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-shadow {
+	text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+/* used to override pale yellow color that chrome uses when user chooses an item from 
+its autocomplete list */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;    
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #000;
+}
+
+input:-webkit-autofill:focus {  
+    -webkit-text-fill-color: #000;
+} 

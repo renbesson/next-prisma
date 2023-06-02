@@ -9,8 +9,16 @@ module.exports = {
 	],
 	theme: {
 		colors: {
-			primary: '#E81EEB',
-			secondary: '#04E762',
+			primary: {
+				light: '#F069F2',
+				DEFAULT: '#E81EEB',
+				dark: '#A60FA9',
+			},
+			secondary: {
+				light: '#0EFB71',
+				DEFAULT: '#03B54D',
+				dark: '#02642B',
+			},
 			contrast: '#F4F4ED',
 		},
 		extend: {

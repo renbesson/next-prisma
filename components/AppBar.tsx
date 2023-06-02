@@ -10,12 +10,12 @@ async function AppBar() {
 	const SignInMenu = () => (
 		<ul className='py-2' aria-labelledby='user-menu-button'>
 			<li>
-				<a
-					href='#'
+				<Link
+					href='/updateProfile'
 					className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'
 				>
 					Update Profile
-				</a>
+				</Link>
 			</li>
 			<li>
 				<SignOutButton />
@@ -48,9 +48,9 @@ async function AppBar() {
 
 	return (
 		<nav className='bg-primary shadow-2xl'>
-			<div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4'>
+			<div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2'>
 				<Link href='/' className='flex items-center'>
-					<img src='https://flowbite.com/docs/images/logo.svg' className='h-8 mr-3' alt='logo' />
+					<img src='https://flowbite.com/docs/images/logo.svg' className='h-12 mr-3' alt='logo' />
 					<span className='text-2xl font-semibold'>Site Name</span>
 				</Link>
 				<div className='flex items-center md:order-2'>
