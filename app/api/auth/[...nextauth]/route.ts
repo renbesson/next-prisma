@@ -1,4 +1,4 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import { PrismaClient, User } from '@prisma/client';
 import { compare } from 'bcrypt';
 import NextAuth, { NextAuthOptions } from 'next-auth';
